@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'comunidadesIndigenasBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE'    : 'django.db.backends.postgresql_psycopg2',
-        'NAME'      : 'comunidades.db',
+        'NAME'      : 'ComunidadesIndigenas',
         'USER'      : 'postgres',
         'PASSWORD'  : 'postgres',
         'HOST'      : 'localhost',

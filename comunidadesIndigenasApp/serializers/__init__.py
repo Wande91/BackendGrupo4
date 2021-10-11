@@ -1,0 +1,4 @@
+from .asociacionSerializer import AsociacionSerializer
+from .departamentoSerializer import DepartamentoSerializer
+from .municipioSerializer import MunicipioSerilaizer
+from .reguardoSerializer import ResguardoSerializer

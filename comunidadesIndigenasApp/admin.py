@@ -1,13 +1,15 @@
 from django.contrib                              import admin
-from comunidadesIndigenasApp.models.asociacion   import Asociacion
-from comunidadesIndigenasApp.models.departamento import Departamento
-from comunidadesIndigenasApp.models.municipio    import Municipio
-from comunidadesIndigenasApp.models.resguardo    import Resguardo
-# Register your models here.
-
+from .models.asociacion   import Asociacion
+from .models.departamento import Departamento
+from .models.municipio    import Municipio
+from .models.resguardo    import Resguardo
+from .models.user         import User
+from .models.account      import Account
 
 admin.site.register(Asociacion)
 admin.site.register(Departamento)
 admin.site.register(Municipio)
 admin.site.register(Resguardo)
+admin.site.register(User)
+admin.site.register(Account)
 

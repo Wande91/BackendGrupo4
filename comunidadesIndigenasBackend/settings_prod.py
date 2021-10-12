@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zh=y)c1*qg##f%!f@rna*usui=b^5f6p@uje@s!te_ws^uccc@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['Localhost']
 
 
 # Application definition
@@ -101,10 +102,10 @@ WSGI_APPLICATION = 'comunidadesIndigenasBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE'    : 'django.db.backends.postgresql_psycopg2',
-        'NAME'      : 'ComunidadesIndigenas',
-        'USER'      : 'postgres',
-        'PASSWORD'  : '',
-        'HOST'      : '127.0.0.1',
+        'NAME'      : 'd62chb4d4lfp0u',
+        'USER'      : 'spcskyfecsfyra',
+        'PASSWORD'  : 'fa93a06387998aec7c29808b3a36a2a0b1866732ec8a63893029daac83457acd',
+        'HOST'      : 'ec2-44-198-196-149.compute-1.amazonaws.com',
         'PORT'      : '5432',
     }
 }
@@ -152,3 +153,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+django_heroku.settings(locals())

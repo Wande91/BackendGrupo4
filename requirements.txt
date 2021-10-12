@@ -2,4 +2,5 @@ Django
 djangorestframework
 djangorestframework-simplejwt
 psycopg2-binary
-numpy
+gunicorn
+django-heroku

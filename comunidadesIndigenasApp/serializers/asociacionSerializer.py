@@ -11,8 +11,8 @@ class AsociacionSerializer(serializers.ModelSerializer):
 
     def to_representation(self,obj):
       asociacion = Asociacion.objects.get(id=obj.id)
-      municipio = Municipio.objects.get(id=obj.municipio)
-      departamento = Departamento.objects.get(id=obj.municipio.departamento_id)
+      municipio = Municipio.objects.get(id=obj.municipio.id)
+      departamento = Departamento.objects.get(id=obj.municipio.departamento.id)
       return {
         'nombre'    : asociacion.nombre,
         'texto'     : asociacion.texto,
@@ -25,5 +25,6 @@ class AsociacionSerializer(serializers.ModelSerializer):
           'nombre' : departamento.nombre
         }
       }
+    
 
       

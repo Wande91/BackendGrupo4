@@ -6,20 +6,19 @@ from rest_framework_simplejwt.backends                        import TokenBacken
 from comunidadesIndigenasApp.models.asociacion                import Asociacion
 from comunidadesIndigenasApp.serializers.asociacionSerializer import AsociacionSerializer
 
-
 class AsociacionDetailView(generics.RetrieveAPIView):
   serializer_class   = AsociacionSerializer
-  permission_classes = (IsAuthenticated,)
+#   permission_classes = (IsAuthenticated,)
   queryset           = Asociacion.objects.all()
   
   def get(self, request, *args, **kwargs):
-      token        = request.META.get('HTTP_AUTHORIZATION')[7:]
-      tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
-      valid_data   = tokenBackend.decode(token,verify=False)
+    #   token        = request.META.get('HTTP_AUTHORIZATION')[7:]
+    #   tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+    #   valid_data   = tokenBackend.decode(token,verify=False)
         
-      if valid_data['user_id'] != kwargs['user']:
-          stringResponse = {'detail':'Unauthorized Request'}
-          return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+    #   if valid_data['user_id'] != kwargs['user']:
+    #       stringResponse = {'detail':'Unauthorized Request'}
+    #       return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
             
       return super().get(request, *args, **kwargs)
 
@@ -48,11 +47,12 @@ class AsociacionCreateView(generics.CreateAPIView):
       tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
       valid_data   = tokenBackend.decode(token,verify=False)
         
-      if valid_data['user_id'] != request.data['user_id']:
-          stringResponse = {'detail':'Unauthorized Request'}
-          return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+    #   if valid_data['user_id'] != request.data['user_id']:
+    #       stringResponse = {'detail':'Unauthorized Request'}
+    #       return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
         
-      serializer = AsociacionSerializer(data=request.data['Asociacion_data'])
+    #   serializer = AsociacionSerializer(data=request.data['Asociacion_data'])
+      serializer = AsociacionSerializer(data=request.data)
       serializer.is_valid(raise_exception=True)
       serializer.save()
     

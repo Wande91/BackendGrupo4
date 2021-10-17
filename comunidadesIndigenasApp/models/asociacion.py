@@ -10,4 +10,5 @@ class Asociacion(models.Model):
     municipio = ForeignKey(Municipio,related_name='municipio', on_delete=models.CASCADE)
     texto  = models.TextField(blank=True, null=True)
 
+
     

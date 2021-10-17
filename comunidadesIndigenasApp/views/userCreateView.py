@@ -9,8 +9,8 @@ class UserCreateView(views.APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         
-        tokenData = {"username":request.data["username"],
-                    "password":request.data["password"]}
+        tokenData = {'username':request.data['username'],
+                    'password':request.data['password']}
         try:
             tokenSerializer = TokenObtainPairSerializer(data=tokenData)
             tokenSerializer.is_valid(raise_exception=True)

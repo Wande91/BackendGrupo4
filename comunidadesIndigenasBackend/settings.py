@@ -65,10 +65,10 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.AllowAny',
         ),
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         ),
 }
 
@@ -101,9 +101,9 @@ WSGI_APPLICATION = 'comunidadesIndigenasBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE'    : 'django.db.backends.postgresql_psycopg2',
-        'NAME'      : 'ComunidadesIndigenas',
+        'NAME'      : 'comunidades',
         'USER'      : 'postgres',
-        'PASSWORD'  : '',
+        'PASSWORD'  : 'admin',
         'HOST'      : '127.0.0.1',
         'PORT'      : '5432',
     }

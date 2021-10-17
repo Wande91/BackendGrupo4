@@ -4,7 +4,7 @@ from rest_framework                              import serializers
 class DepartamentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Departamento
-        fields = ['nombre', 'numero_resguardos', 'poblacion', 'texto']
+        fields = ['nombre', 'numero_resguardos', 'numero_municipios_con_resguardo', 'poblacion', 'texto']
     
     def to_representation(self,obj):
       departamento = Departamento.objects.get(id=obj.id)
@@ -12,6 +12,7 @@ class DepartamentoSerializer(serializers.ModelSerializer):
         'id'                : departamento.id,
         'nombre'            : departamento.nombre,
         'numero_resguardos' : departamento.numero_resguardos,
+        'numero_municipios_con_resguardo' : departamento.numero_municipios_con_resguardo ,
         'poblacion'         : departamento.poblacion,
         'texto'             : departamento.texto
       }

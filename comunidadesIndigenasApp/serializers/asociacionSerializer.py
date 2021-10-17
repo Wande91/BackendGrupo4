@@ -4,11 +4,14 @@ from rest_framework                            import serializers
 class AsociacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Asociacion
-        fields = ['nombre','texto']
+        fields = ['nombre','texto','departamento']
         
     def to_representation(self,obj):
-      asociación = Asociacion.objects.get(id=obj.id)
+      asociacion = Asociacion.objects.get(id=obj.id)
       return {
         'nombre' : asociacion.nombre,
-        'texto'  : asociacion.texto
+        'texto'  : asociacion.texto,
+        'departameno' : asociacion.departamento
       }
+
+      

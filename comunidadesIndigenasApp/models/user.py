@@ -32,9 +32,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     email    = models.EmailField('Email',   max_length = 100)
     
     def save(self, **kwargs):
-        some_salt = 'mMUj0DrIK6vgtdIYepkIxN'
+        some_salt     = 'mMUj0DrIK6vgtdIYepkIxN'
         self.password = make_password(self.password, some_salt)
         super().save(**kwargs)
     
-    objects = UserManager()
+    objects        = UserManager()
     USERNAME_FIELD = 'username'

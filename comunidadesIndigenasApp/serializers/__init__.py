@@ -2,3 +2,4 @@ from .asociacionSerializer import AsociacionSerializer
 from .departamentoSerializer import DepartamentoSerializer
 from .municipioSerializer import MunicipioSerializer
 from .resguardoSerializer import ResguardoSerializer
+from .userSerializer import UserSerializer

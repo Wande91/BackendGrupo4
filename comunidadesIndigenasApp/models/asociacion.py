@@ -1,8 +1,8 @@
 from django.db                       import models
 from django.db.models.fields.related import ForeignKey
-from .municipio                      import Municipio
 
-from comunidadesIndigenasApp.models.municipio import Municipio
+from comunidadesIndigenasApp.models.departamento import Departamento
+from comunidadesIndigenasApp.models.municipio    import Municipio
 
 class Asociacion(models.Model):
     id     = models.AutoField(primary_key=True)

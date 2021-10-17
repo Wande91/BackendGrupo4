@@ -3,9 +3,9 @@ from rest_framework                                           import generics, s
 from rest_framework.response                                  import Response
 from rest_framework.permissions                               import IsAuthenticated
 from rest_framework_simplejwt.backends                        import TokenBackend
-
 from comunidadesIndigenasApp.models.asociacion                import Asociacion
 from comunidadesIndigenasApp.serializers.asociacionSerializer import AsociacionSerializer
+
 
 class AsociacionDetailView(generics.RetrieveAPIView):
   serializer_class   = AsociacionSerializer

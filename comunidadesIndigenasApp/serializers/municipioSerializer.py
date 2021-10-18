@@ -6,7 +6,7 @@ from rest_framework                              import serializers
 from comunidadesIndigenasApp.serializers.departamentoSerializer import DepartamentoSerializer
 
 class MunicipioSerializer(serializers.ModelSerializer):
-    departamento = DepartamentoSerializer()
+    #departamento = DepartamentoSerializer()
     class Meta:
         model  = Municipio
         fields =['nombre', 'texto', 'departamento']
@@ -15,13 +15,13 @@ class MunicipioSerializer(serializers.ModelSerializer):
         municipio    = Municipio.objects.get(id =obj.id)
         departamento = Departamento.objects.get(id = obj.departamento.id)
         return {
-            'id'              : municipio.id,
-            'nombre'          : municipio.nombre,
-            'texto'           : municipio.texto,
-            'dato'       : "prueba serializador",
+            'id'     : municipio.id,
+            'nombre' : municipio.nombre,
+            'texto'  : municipio.texto,
             'departamento' : {
-                'nombre' : departamento.nombre,
-                'texto'  : departamento.texto,
+                'id'       : departamento.id,
+                'nombre'   : departamento.nombre,
+                'texto'    : departamento.texto,
                 'poblacion': departamento.poblacion
             }
         }

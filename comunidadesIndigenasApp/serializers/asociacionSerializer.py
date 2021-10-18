@@ -1,7 +1,7 @@
-from rest_framework                               import serializers
-from comunidadesIndigenasApp.models.asociacion    import Asociacion
-from comunidadesIndigenasApp.models.departamento  import Departamento
-from comunidadesIndigenasApp.models.municipio     import Municipio
+from rest_framework                                         import serializers
+from comunidadesIndigenasApp.models.asociacion              import Asociacion
+from comunidadesIndigenasApp.models.departamento            import Departamento
+from comunidadesIndigenasApp.models.municipio               import Municipio
 
 
 class AsociacionSerializer(serializers.ModelSerializer):
@@ -14,6 +14,7 @@ class AsociacionSerializer(serializers.ModelSerializer):
       municipio = Municipio.objects.get(id=obj.municipio.id)
       departamento = Departamento.objects.get(id=obj.municipio.departamento.id)
       return {
+        'id'        : asociacion.id,
         'nombre'    : asociacion.nombre,
         'texto'     : asociacion.texto,
         'municipio' : {

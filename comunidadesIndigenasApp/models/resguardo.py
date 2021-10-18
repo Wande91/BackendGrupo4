@@ -7,4 +7,4 @@ class Resguardo(models.Model):
     nombre        = models.CharField(max_length=60)
     poblacion     = models.IntegerField() 
     texto         = models.TextField(blank=True, null=True)
-    asociacion = models.ForeignKey(Asociacion, related_name='asociacion', on_delete=models.CASCADE)
+    asociacion    = models.ForeignKey(Asociacion, related_name='asociacion', on_delete=models.CASCADE)

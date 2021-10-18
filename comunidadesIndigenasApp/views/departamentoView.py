@@ -9,33 +9,14 @@ from comunidadesIndigenasApp.serializers.departamentoSerializer import Departame
 class DepartamentoDetailView(generics.RetrieveAPIView):
   queryset           = Departamento.objects.all()
   serializer_class   = DepartamentoSerializer
-#   permission_classes = (IsAuthenticated,)
-
   
-  def get(self, request, *args, **kwargs):   
-    #   token        = request.META.get('HTTP_AUTHORIZATION')[7:]
-    #   tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
-    #   valid_data   = tokenBackend.decode(token,verify=False)
-        
-    #   if valid_data['user_id'] != kwargs['user']:
-    #       stringResponse = {'detail':'Unauthorized Request'}
-    #       return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
-    
+  def get(self, request, *args, **kwargs):      
       return super().get(request, *args, **kwargs)
 
 class DepartamentoNombreView(generics.ListAPIView):
   serializer_class   = DepartamentoSerializer
-  permission_classes = (IsAuthenticated,)
   
   def get_queryset(self):
-      token        = self.request.META.get('HTTP_AUTHORIZATION')[7:]
-      tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
-      valid_data   = tokenBackend.decode(token,verify=False)
-        
-      if valid_data['user_id'] != self.kwargs['user']:
-          stringResponse = {'detail':'Unauthorized Request'}
-          return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
-
       queryset = Departamento.objects.filter(nombre=self.kwargs['nombre'])
       return queryset
   

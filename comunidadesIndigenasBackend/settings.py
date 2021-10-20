@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-zh=y)c1*qg##f%!f@rna*usui=b^5f6p@uje@s!te_ws^uccc@
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'comunidadesIndigenasApp',
     'rest_framework',
+    'corsheaders',
 ]
 
 SIMPLE_JWT = {
@@ -61,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -103,7 +106,7 @@ DATABASES = {
         'ENGINE'    : 'django.db.backends.postgresql_psycopg2',
         'NAME'      : 'comunidades',
         'USER'      : 'postgres',
-        'PASSWORD'  : 'admin',
+        'PASSWORD'  : '',
         'HOST'      : '127.0.0.1',
         'PORT'      : '5432',
     }

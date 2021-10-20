@@ -1,6 +1,8 @@
-Django
-djangorestframework
-djangorestframework-simplejwt
-psycopg2-binary
+Django==3.2.8
+djangorestframework==3.12.4
+djangorestframework-simplejwt==4.8.0
+psycopg2-binary==2.9.1
+PyJWT==2.1.0
+django-cors-headers
 gunicorn
 django-heroku

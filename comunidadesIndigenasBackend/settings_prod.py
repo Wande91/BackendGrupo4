@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-zh=y)c1*qg##f%!f@rna*usui=b^5f6p@uje@s!te_ws^uccc@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'https://comindigenas-be.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', 'https://p46-g4-comindigenasbe.herokuapp.com/']
 #CORS_ALLOWED_ORIGINS = [
     #link despliegue frontend
 #]

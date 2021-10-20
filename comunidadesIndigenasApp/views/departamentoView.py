@@ -29,11 +29,11 @@ class DepartamentoCreateView(generics.CreateAPIView):
       tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
       valid_data   = tokenBackend.decode(token,verify=False)
         
-    #   if valid_data['user_id'] != request.data['user_id']:
-    #       stringResponse = {'detail':'Unauthorized Request'}
-    #       return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
-        
-      serializer = DepartamentoSerializer(data=request.data)#['Departamento_data'])
+      if valid_data['user_id'] != kwargs['user']:
+        stringResponse = {'detail':'Unauthorized Request'}
+        return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+
+      serializer = DepartamentoSerializer(data=request.data)
       serializer.is_valid(raise_exception=True)
       serializer.save()
     
@@ -49,9 +49,9 @@ class DepartamentoUpdateView(generics.UpdateAPIView):
       tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
       valid_data   = tokenBackend.decode(token,verify=False)
         
-    #   if valid_data['user_id'] != kwargs['user']:
-    #       stringResponse = {'detail':'Unauthorized Request'}
-    #       return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+      if valid_data['user_id'] != kwargs['user']:
+        stringResponse = {'detail':'Unauthorized Request'}
+        return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
         
       return super().update(request, *args, **kwargs)
     
@@ -65,8 +65,8 @@ class DepartamentoDeleteView(generics.DestroyAPIView):
       tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
       valid_data   = tokenBackend.decode(token,verify=False)
         
-    #   if valid_data['user_id'] != kwargs['user']:
-    #       stringResponse = {'detail':'Unauthorized Request'}
-    #       return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+      if valid_data['user_id'] != kwargs['user']:
+        stringResponse = {'detail':'Unauthorized Request'}
+        return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
         
       return super().destroy(request, *args, **kwargs)

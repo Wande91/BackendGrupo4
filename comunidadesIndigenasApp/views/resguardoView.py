@@ -32,11 +32,10 @@ class ResguardoCreateView(generics.CreateAPIView):
         tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
         valid_data   = tokenBackend.decode(token,verify=False)
         
-        # if valid_data['user_id'] != request.data['user_id']:
-        #     stringResponse = {'detail':'Unauthorized Request'}
-        #     return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+        if valid_data['user_id'] != kwargs['user']:
+            stringResponse = {'detail':'Unauthorized Request'}
+            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
         
-        # serializer = ResguardoSerializer(data=request.data['Resguardo_data'])
         serializer = ResguardoSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -54,9 +53,9 @@ class ResguardoUpdateView(generics.UpdateAPIView):
         tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
         valid_data   = tokenBackend.decode(token,verify=False)
         
-        #if valid_data['user_id'] != kwargs['user']:
-        #    stringResponse = {'detail':'Unauthorized Request'}
-        #    return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+        if valid_data['user_id'] != kwargs['user']:
+            stringResponse = {'detail':'Unauthorized Request'}
+            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
 
         return super().update(request, *args, **kwargs)
 
@@ -71,8 +70,8 @@ class ResguardoDeleteView(generics.DestroyAPIView):
         tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
         valid_data   = tokenBackend.decode(token,verify=False)
         
-        #if valid_data['user_id'] != kwargs['user']:
-        #    stringResponse = {'detail':'Unauthorized Request'}
-        #    return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+        if valid_data['user_id'] != kwargs['user']:
+            stringResponse = {'detail':'Unauthorized Request'}
+            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
 
         return super().destroy(request, *args, **kwargs)

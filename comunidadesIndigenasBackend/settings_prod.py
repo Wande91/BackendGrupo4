@@ -27,10 +27,10 @@ SECRET_KEY = 'django-insecure-zh=y)c1*qg##f%!f@rna*usui=b^5f6p@uje@s!te_ws^uccc@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['Localhost']
-CORS_ALLOWED_ORIGINS = [
+ALLOWED_HOSTS = ['localhost', 'https://comindigenas-be.herokuapp.com/']
+#CORS_ALLOWED_ORIGINS = [
     #link despliegue frontend
-]
+#]
 
 # Application definition
 
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'comunidadesIndigenasApp',
     'rest_framework',
-    'corsheaders',
+    #'corsheaders',
 ]
 
 SIMPLE_JWT = {
@@ -65,15 +65,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    #'corsheaders.middleware.CorsMiddleware',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.AllowAny',
         ),
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         ),
 }
 

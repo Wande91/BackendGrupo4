@@ -1,5 +1,6 @@
 from django.conf                                              import settings
-from rest_framework                                           import generics, status
+from django.db.models import query
+from rest_framework                                           import generics, serializers, status
 from rest_framework.response                                  import Response
 from rest_framework.permissions                               import IsAuthenticated
 from rest_framework_simplejwt.backends                        import TokenBackend
@@ -13,13 +14,20 @@ class AsociacionDetailView(generics.RetrieveAPIView):
   def get(self, request, *args, **kwargs):            
       return super().get(request, *args, **kwargs)
 
-class AsociacionNombreView(generics.ListAPIView):
+class AsociacionMun(generics.ListAPIView):
   serializer_class   = AsociacionSerializer
   
   def get_queryset(self):
-      queryset = Asociacion.objects.filter(nombre=self.kwargs['nombre'])
+      queryset = Asociacion.objects.filter(municipio=self.kwargs['municipio'])
       return queryset
   
+class AsociacionList(generics.ListAPIView):
+  serializer_class = AsociacionSerializer
+
+  def get_queryset(self):
+      queryset = Asociacion.objects.all()
+      return queryset
+
 class AsociacionCreateView(generics.CreateAPIView):
   serializer_class   = AsociacionSerializer
   permission_classes = (IsAuthenticated,)

@@ -15,11 +15,18 @@ class MunicipioDetailView(generics.RetrieveAPIView):
   def get(self, request, *args, **kwargs):  
       return super().get(request, *args, **kwargs)
 
-class MunicipioNombreView(generics.ListAPIView):
+class MunicipioDepView(generics.ListAPIView):
   serializer_class   = MunicipioSerializer
   
   def get_queryset(self):
-      queryset = Municipio.objects.filter(nombre=self.kwargs['nombre'])
+      queryset = Municipio.objects.filter(departamento=self.kwargs['departamento'])
+      return queryset
+
+class MunicipioList(generics.ListAPIView):
+  serializer_class   = MunicipioSerializer
+  
+  def get_queryset(self):
+      queryset = Municipio.objects.all()
       return queryset
   
 class MunicipioCreateView(generics.CreateAPIView):

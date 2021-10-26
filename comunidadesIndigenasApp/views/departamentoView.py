@@ -20,6 +20,13 @@ class DepartamentoNombreView(generics.ListAPIView):
       queryset = Departamento.objects.filter(nombre=self.kwargs['nombre'])
       return queryset
   
+class DepartamentoList(generics.ListAPIView):
+  serializer_class   = DepartamentoSerializer
+  
+  def get_queryset(self):
+      queryset = Departamento.objects.all()
+      return queryset
+
 class DepartamentoCreateView(generics.CreateAPIView):
   serializer_class   = DepartamentoSerializer
   permission_classes = (IsAuthenticated,)

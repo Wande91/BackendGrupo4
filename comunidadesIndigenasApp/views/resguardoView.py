@@ -3,6 +3,7 @@ from rest_framework                                       import generics, statu
 from rest_framework.response                              import Response
 from rest_framework.permissions                           import IsAuthenticated
 from rest_framework_simplejwt.backends                    import TokenBackend
+from comunidadesIndigenasApp.models.asociacion import Asociacion
 
 from comunidadesIndigenasApp.models.resguardo               import Resguardo
 from comunidadesIndigenasApp.serializers.resguardoSerializer import ResguardoSerializer
@@ -15,13 +16,19 @@ class ResguardoDetailView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
-class ResguardoNombreView(generics.ListAPIView):
+class ResguardoAsoc(generics.ListAPIView):
     serializer_class   = ResguardoSerializer
     
     def get_queryset(self):
-        queryset = Resguardo.objects.filter(nombre=self.kwargs['nombre'])
+        queryset = Resguardo.objects.filter(asociacion=self.kwargs['asociacion'])
         return queryset
 
+class ResguardoList(generics.ListAPIView):
+    serializer_class   = ResguardoSerializer
+    
+    def get_queryset(self):
+        queryset = Resguardo.objects.all()
+        return queryset
 
 class ResguardoCreateView(generics.CreateAPIView):
     serializer_class   = ResguardoSerializer

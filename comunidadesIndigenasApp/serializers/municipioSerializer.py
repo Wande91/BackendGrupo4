@@ -21,7 +21,5 @@ class MunicipioSerializer(serializers.ModelSerializer):
             'departamento' : {
                 'id'       : departamento.id,
                 'nombre'   : departamento.nombre,
-                'texto'    : departamento.texto,
-                'poblacion': departamento.poblacion
             }
         }

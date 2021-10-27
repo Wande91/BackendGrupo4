@@ -7,6 +7,7 @@ from comunidadesIndigenasApp.models.municipio    import Municipio
 class Asociacion(models.Model):
     id     = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=150, unique=True)
+    siglas = models.CharField(max_length=40, unique=True)
     municipio = ForeignKey(Municipio,related_name='municipio', on_delete=models.CASCADE)
     texto  = models.TextField(blank=True, null=True)
 

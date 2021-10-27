@@ -16,13 +16,14 @@ class AsociacionSerializer(serializers.ModelSerializer):
       return {
         'id'        : asociacion.id,
         'nombre'    : asociacion.nombre,
+        'siglas'    : asociacion.siglas,
         'texto'     : asociacion.texto,
         'municipio' : {
-          'municipio_id' : municipio.id,
+          'id'      : municipio.id,
           'nombre'  : municipio.nombre
         },
         'departamento':{
-          'departamento_id' : departamento.id,
+          'id'     : departamento.id,
           'nombre' : departamento.nombre
         }
       }

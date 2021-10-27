@@ -21,7 +21,7 @@ class ResguardoSerializer(serializers.ModelSerializer):
             'texto'         : resguardo.texto,
             'asociacion' : {
                 'id'     : asociacion.id,  
-                'nombre' : asociacion.nombre,
+                'nombre' : asociacion.siglas,
             },
             'municipio' : {
                 'id'    : municipio.id,

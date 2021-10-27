@@ -22,14 +22,13 @@ class ResguardoSerializer(serializers.ModelSerializer):
             'asociacion' : {
                 'id'     : asociacion.id,  
                 'nombre' : asociacion.nombre,
-                'texto'  : asociacion.texto,
             },
             'municipio' : {
+                'id'    : municipio.id,
                 'nombre': municipio.nombre,
-                'texto' : municipio.texto,
                 'departamento'  : {
-                    'nombre' : departamento.nombre,
-                    'poblacion': departamento.poblacion
+                    'id'       : departamento.id,
+                    'nombre'   : departamento.nombre,
                 }
             }
         }

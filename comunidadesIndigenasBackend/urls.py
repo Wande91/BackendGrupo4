@@ -26,7 +26,7 @@ urlpatterns = [
     #Informacion Municipio por id
     path('municipio/<int:user>/<int:pk>/',               views.MunicipioDetailView.as_view()), 
     #Informacion Municipio por Departamento
-    path('municipio/<int:user>/<int:departamento>/',    views.MunicipioDepView.as_view()),
+    path('municipio/filter/<int:user>/<int:departamento>/',    views.MunicipioDepView.as_view()),
     #Informacion Municipio General
     path('municipio/<int:user>/list/',                  views.MunicipioList.as_view()),
     
@@ -37,7 +37,7 @@ urlpatterns = [
     #Informacion Asociacion por id
     path('asociacion/<int:user>/<int:pk>/',             views.AsociacionDetailView.as_view()), 
     #Informacion Asociacion por municipio
-    path('asociacion/<int:user>/<int:municipio>/',      views.AsociacionMun.as_view()),
+    path('asociacion/filter/<int:user>/<int:municipio>/',      views.AsociacionMun.as_view()),
     #Informacion Asociacion general
     path('asociacion/<int:user>/list/',                 views.AsociacionList.as_view()),
     
@@ -48,9 +48,9 @@ urlpatterns = [
     #Informacion Resguardo por id
     path('resguardo/<int:user>/<int:pk>/',              views.ResguardoDetailView.as_view()), 
     #Informacion Resguardo por Asociacion
-    path('resguardo/<int:user>/<int:asociacion>/',      views.ResguardoAsoc.as_view()),
+    path('resguardo/filter/<int:user>/<int:asociacion>/',      views.ResguardoAsoc.as_view()),
     #Informacion Resguardo general (falta ajustar)
-    path('resguardo/list/<int:user>/',                  views.ResguardoList.as_view()),
+    path('resguardo/<int:user>/list/',                  views.ResguardoList.as_view()),
 
     path('resguardo/create/<int:user>/',                views.ResguardoCreateView.as_view()),
     path('resguardo/update/<int:user>/<int:pk>/',       views.ResguardoUpdateView.as_view()), 

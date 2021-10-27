@@ -8,24 +8,51 @@ from comunidadesIndigenasApp.serializers.departamentoSerializer import Departame
 
 class DepartamentoDetailView(generics.RetrieveAPIView):
   queryset           = Departamento.objects.all()
+  permission_classes = (IsAuthenticated,)
   serializer_class   = DepartamentoSerializer
   
-  def get(self, request, *args, **kwargs):      
+  def get(self, request, *args, **kwargs):
+      token        = request.META.get('HTTP_AUTHORIZATION')[7:]
+      tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+      valid_data   = tokenBackend.decode(token,verify=False)
+      
+      if valid_data['user_id'] != kwargs['user']:
+          stringResponse = {'detail':'Unauthorized Request'}
+          return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+      
       return super().get(request, *args, **kwargs)
 
 class DepartamentoNombreView(generics.ListAPIView):
   serializer_class   = DepartamentoSerializer
+  permission_classes = (IsAuthenticated,)
+  queryset           = Departamento.objects.all()
   
-  def get_queryset(self):
-      queryset = Departamento.objects.filter(nombre=self.kwargs['nombre'])
-      return queryset
+  def get(self, request, *args, **kwargs):
+      token        = self.request.META.get('HTTP_AUTHORIZATION')[7:]
+      tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+      valid_data   = tokenBackend.decode(token,verify=False)
+      
+      if valid_data['user_id'] != self.kwargs['user']:
+          stringResponse = {'detail':'Unauthorized Request'}
+          return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+
+      return super().get(request, *args, **kwargs)
   
 class DepartamentoList(generics.ListAPIView):
   serializer_class   = DepartamentoSerializer
-  
-  def get_queryset(self):
-      queryset = Departamento.objects.all()
-      return queryset
+  permission_classes = (IsAuthenticated,)
+  queryset           = Departamento.objects.all()
+
+  def get(self, request, *args, **kwargs):
+      token        = self.request.META.get('HTTP_AUTHORIZATION')[7:]
+      tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+      valid_data   = tokenBackend.decode(token,verify=False)
+      
+      if valid_data['user_id'] != self.kwargs['user']:
+          stringResponse = {'detail':'Unauthorized Request'}
+          return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+
+      return super().get(request, *args, **kwargs)
 
 class DepartamentoCreateView(generics.CreateAPIView):
   serializer_class   = DepartamentoSerializer

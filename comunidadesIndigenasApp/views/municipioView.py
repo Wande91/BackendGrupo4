@@ -10,24 +10,51 @@ from comunidadesIndigenasApp.serializers.municipioSerializer  import MunicipioSe
 
 class MunicipioDetailView(generics.RetrieveAPIView):
   queryset           = Municipio.objects.all()
+  permission_classes = (IsAuthenticated,)
   serializer_class   = MunicipioSerializer
   
-  def get(self, request, *args, **kwargs):  
+  def get(self, request, *args, **kwargs):
+      token        = request.META.get('HTTP_AUTHORIZATION')[7:]
+      tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+      valid_data   = tokenBackend.decode(token,verify=False)
+      
+      if valid_data['user_id'] != kwargs['user']:
+          stringResponse = {'detail':'Unauthorized Request'}
+          return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+      
       return super().get(request, *args, **kwargs)
 
 class MunicipioDepView(generics.ListAPIView):
   serializer_class   = MunicipioSerializer
+  permission_classes = (IsAuthenticated,)
   
-  def get_queryset(self):
-      queryset = Municipio.objects.filter(departamento=self.kwargs['departamento'])
+  def get_queryset(self):     
+
+      token        = self.request.META.get('HTTP_AUTHORIZATION')[7:]
+      tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+      valid_data   = tokenBackend.decode(token,verify=False)
+      
+      if valid_data['user_id'] != self.kwargs['user']:
+          return 
+
+      queryset = Municipio.objects.filter(departamento=self.kwargs['departamento'])          
       return queryset
 
 class MunicipioList(generics.ListAPIView):
   serializer_class   = MunicipioSerializer
-  
-  def get_queryset(self):
-      queryset = Municipio.objects.all()
-      return queryset
+  permission_classes = (IsAuthenticated,)
+  queryset           = Municipio.objects.all()
+
+  def get(self, request, *args, **kwargs):
+      token        = self.request.META.get('HTTP_AUTHORIZATION')[7:]
+      tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+      valid_data   = tokenBackend.decode(token,verify=False)
+      
+      if valid_data['user_id'] != self.kwargs['user']:
+          stringResponse = {'detail':'Unauthorized Request'}
+          return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+
+      return super().get(request, *args, **kwargs)
   
 class MunicipioCreateView(generics.CreateAPIView):
   serializer_class   = MunicipioSerializer

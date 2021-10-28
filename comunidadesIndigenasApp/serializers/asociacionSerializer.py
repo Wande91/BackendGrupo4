@@ -7,7 +7,7 @@ from comunidadesIndigenasApp.models.municipio               import Municipio
 class AsociacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Asociacion
-        fields = ['nombre','texto','municipio']
+        fields = ['nombre','siglas','texto','municipio']
 
     def to_representation(self,obj):
       asociacion = Asociacion.objects.get(id=obj.id)

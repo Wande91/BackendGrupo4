@@ -11,6 +11,8 @@ urlpatterns = [
     path('refresh/',                                    TokenRefreshView.as_view()), # generate new access token
     path('user/',                                       views.UserCreateView.as_view()), # create a new user
     path('user/<int:pk>/',                              views.UserDetailView.as_view()), # check info for an specific us
+    path('user/update/<int:user>/<int:pk>/',            views.UserUpdateView.as_view()),
+    path('user/remove/<int:user>/<int:pk>/',            views.UserDeleteView.as_view()),
 
     #Informacion Department por id
     path('departamento/<int:user>/<int:pk>/',           views.DepartamentoDetailView.as_view()), 
@@ -37,7 +39,7 @@ urlpatterns = [
     #Informacion Asociacion por id
     path('asociacion/<int:user>/<int:pk>/',             views.AsociacionDetailView.as_view()), 
     #Informacion Asociacion por municipio
-    path('asociacion/filter/<int:user>/<int:municipio>/',      views.AsociacionMun.as_view()),
+    path('asociacion/filter/<int:user>/<int:municipio>/', views.AsociacionMun.as_view()),
     #Informacion Asociacion general
     path('asociacion/<int:user>/list/',                 views.AsociacionList.as_view()),
     
@@ -48,8 +50,12 @@ urlpatterns = [
     #Informacion Resguardo por id
     path('resguardo/<int:user>/<int:pk>/',              views.ResguardoDetailView.as_view()), 
     #Informacion Resguardo por Asociacion
-    path('resguardo/filter/<int:user>/<int:asociacion>/',      views.ResguardoAsoc.as_view()),
-    #Informacion Resguardo general (falta ajustar)
+    path('resguardo/asofilter/<int:user>/<int:asociacion>/',   views.ResguardoAsoc.as_view()),
+    #Informacion Resguardo por Municipio
+    path('resguardo/munfilter/<int:user>/<int:municipio>/',    views.ResguardoMun.as_view()),
+    #Informacion Resguardo por Departamento
+    path('resguardo/depfilter/<int:user>/<int:departamento>/', views.ResguardoDep.as_view()),
+    #Informacion Resguardo general 
     path('resguardo/<int:user>/list/',                  views.ResguardoList.as_view()),
 
     path('resguardo/create/<int:user>/',                views.ResguardoCreateView.as_view()),

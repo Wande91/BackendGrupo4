@@ -3,11 +3,9 @@ from rest_framework                                       import generics, statu
 from rest_framework.response                              import Response
 from rest_framework.permissions                           import IsAuthenticated
 from rest_framework_simplejwt.backends                    import TokenBackend
-from comunidadesIndigenasApp.models.asociacion import Asociacion
 
 from comunidadesIndigenasApp.models.resguardo               import Resguardo
 from comunidadesIndigenasApp.serializers.resguardoSerializer import ResguardoSerializer
-
 
 class ResguardoDetailView(generics.RetrieveAPIView):
     serializer_class   = ResguardoSerializer
@@ -24,6 +22,36 @@ class ResguardoDetailView(generics.RetrieveAPIView):
           return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
       
       return super().get(request, *args, **kwargs)
+
+class ResguardoDep(generics.ListAPIView):
+    serializer_class   = ResguardoSerializer
+    permission_classes = (IsAuthenticated,)
+    
+    def get_queryset(self):
+        token        = self.request.META.get('HTTP_AUTHORIZATION')[7:]
+        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+        valid_data   = tokenBackend.decode(token,verify=False)
+        
+        if valid_data['user_id'] != self.kwargs['user']:
+            return
+            
+        queryset = Resguardo.objects.select_related('asociacion').filter(asociacion_id__municipio__departamento=self.kwargs['departamento'])
+        return queryset
+        
+class ResguardoMun(generics.ListAPIView):
+    serializer_class   = ResguardoSerializer
+    permission_classes = (IsAuthenticated,)
+    
+    def get_queryset(self):
+        token        = self.request.META.get('HTTP_AUTHORIZATION')[7:]
+        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+        valid_data   = tokenBackend.decode(token,verify=False)
+        
+        if valid_data['user_id'] != self.kwargs['user']:
+            return
+            
+        queryset = Resguardo.objects.select_related('asociacion').filter(asociacion_id__municipio=self.kwargs['municipio'])
+        return queryset
 
 class ResguardoAsoc(generics.ListAPIView):
     serializer_class   = ResguardoSerializer
